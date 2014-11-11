@@ -3,10 +3,10 @@
 // Tommy Payne & Pat Shiu
 // tommypayne.org | obsesstheprocess.com
 
-void setup() {
+/*void setup() {
 	
 }
 
 void draw() {
 	
-}
+}*/
