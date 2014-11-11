@@ -40,3 +40,14 @@ void setup() {
   // parameters : name, default value (float), x, y,  width, height
   controlP5.addNumberbox("numberbox1",50,170,120,60,14);
 }
+ 
+void draw() { 
+  background(0);  // background black
+  
+  // draw 7 squares and use as a fill color the colors from the colors array
+  for(int i=0;i<7;i++) {        // loop through colors array
+    stroke(255);
+    fill(colors[i]);            // use color to fill
+    rect(10+(i*45),210,40,40);  // draw rectangle
+  }  
+}
