@@ -2,9 +2,10 @@
 //-------------------
 //This module creates a GUI for this image glitching app. 
 
-
+//* * * * * * *
 //1st
 //Check out control p5 lib
+//* * * * * * *
 
 //Import button 
 
