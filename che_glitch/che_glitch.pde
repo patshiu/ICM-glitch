@@ -23,6 +23,7 @@ class CheGlitch {
     h = img.height;
   }
 
+
   //The method updates img to whatever's showing on the canvas
   void updateImg() {
     img = get();
