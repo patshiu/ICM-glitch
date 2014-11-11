@@ -10,14 +10,16 @@ void setup() {
   // size(566,542);
   // im=loadImage("che.png");
 
-  size(600, 598);
+  
   im = loadImage("palette.png");
+
+  size(im.width, im.height);
   background(0);
 }
 
 void mouseMoved() {
-  MAX_ASPECT = mouseY/8.0;
-  MIN_SIZE = 11.0-(mouseX/51.2);
+  MAX_ASPECT = map( mouseY, 0, height, 1.0, 65.0);
+  MIN_SIZE = map( mouseX, 0, width, width/10, 2.0);
 }
 
 void splitImage(float x, float y, float w, float h) {
@@ -38,7 +40,7 @@ void splitImage(float x, float y, float w, float h) {
     for (float xx=x; xx<x+w; xx++) {
       for (float yy=y; yy<y+h; yy++) {
         area++;
-        int c=im.pixels[(int)yy*600+(int)xx];
+        int c=im.pixels[(int)yy*im.width+(int)xx];
         lumB+=(c&0xFF);
         lumG+=((c&0xFF00)>>8);
         lumR+=((c&0xFF0000)>>16);
@@ -94,5 +96,5 @@ void splitImage(float x, float y, float w, float h) {
 void draw() {
   filter(INVERT); //this really glitches it up, basic color inversion
   tint(255, 125);
-  splitImage(0, 0, 600, 598);
+  splitImage(0, 0, im.width, im.height);
 }
