@@ -15,9 +15,10 @@ GifMaker gifExport;
 boolean GIFEXPORTMODE = false ;
 
 void setup() {
-	size(displayWidth, displayHeight, OPENGL);
+	
 	background(0);
 	testImg = loadImage("data/gilmore.jpg");
+	size(displayWidth, displayHeight, OPENGL);
 	imgCloud = new DisplacementCloud(testImg);
 	sketchPad = createGraphics(testImg.width, testImg.height);
 	cheGlitchObject = new CheGlitch();
