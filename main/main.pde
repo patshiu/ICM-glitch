@@ -14,7 +14,7 @@ void setup() {
 	testImg = loadImage("data/gilmore.jpg");
 	imgCloud = new DisplacementCloud(testImg);
 	sketchPad = createGraphics(testImg.width, testImg.height);
-	imgCloud.flockToField(int(1));
+	imgCloud.flockToField(true);
 
 }
 
@@ -24,4 +24,15 @@ void draw() {
 	imgCloud.run();
 	//image(testImg, 0, 0 );
 
+}
+
+void mousePressed(){
+	if( imgCloud.goHome == false){
+		imgCloud.goHome(true);
+	}
+	else {
+		imgCloud.flockToField(true);
+		imgCloud.goHome(false);
+
+	}
 }

@@ -23,7 +23,7 @@ class PixelParticle {
 		mass = 1; 
 
 		maxForce = 8; 
-		maxSpeed = 0.2; 
+		maxSpeed = 0.6; 
 
 		c =  motherImg.get(x, y);
 		isDead = false;
@@ -69,7 +69,6 @@ class PixelParticle {
 	void goHome(){
 		steerHome();
 		offScreenCheck();
-		display();
 	}
 
 	//THESE FUNCTION STEER THE PARTICLE DEPENDING ON FILTER STATUS
@@ -82,25 +81,30 @@ class PixelParticle {
 		applyForce(steer);
 	}
 
-	void updateParticle(boolean lavaLamp, boolean flockToField, FlowField flowField, boolean randoWalk, boolean disperse){
+	void updateParticle(boolean lavaLamp, boolean flockToField, FlowField flowField, boolean randoWalk, boolean disperse, boolean goHome){
 		//Apply forces depending on which filters have been applied
-		if( lavaLamp == true){
-			//lavaLamp();
+		if (goHome == true){
+			goHome();
 		}
-		if ( flockToField == true){
-			flockToField(flowField);
-		}
-		if ( randoWalk == true){
-			//randoWalk();
-		}
-		if ( disperse == true){
+		else {
+			if( lavaLamp == true){
+				//lavaLamp();
+			}
+			if ( flockToField == true){
+				flockToField(flowField);
+			}
+			if ( randoWalk == true){
+				//randoWalk();
+			}
+			if ( disperse == true){
 			//disperse()
+			}
 		}
 		//THIS DOES NOT DISPLAY THE PARTICLE
 	}
 
-	void run(boolean lavaLamp, boolean flockToField, FlowField flowField, boolean randoWalk, boolean disperse){
-		updateParticle( lavaLamp, flockToField, flowField, randoWalk, disperse);
+	void run(boolean lavaLamp, boolean flockToField, FlowField flowField, boolean randoWalk, boolean disperse, boolean goHome){
+		updateParticle( lavaLamp, flockToField, flowField, randoWalk, disperse, goHome);
 		display();
 	}
 }
@@ -166,10 +170,10 @@ class PixelParticleSystem {
 /*			}*/
 		}
 	}
-	void run(boolean lavaLamp, boolean flockToField, boolean randoWalk, boolean disperse){
+	void run(boolean lavaLamp, boolean flockToField, boolean randoWalk, boolean disperse, boolean goHome){
 		for (int i = pixelCloud.size()-1; i > 0 ; i--){
 			PixelParticle currentPixel = pixelCloud.get(i);
-			currentPixel.run( lavaLamp, flockToField, flowField, randoWalk, disperse);
+			currentPixel.run( lavaLamp, flockToField, flowField, randoWalk, disperse, goHome);
 		}
 	}
 }

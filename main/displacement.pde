@@ -35,11 +35,12 @@ class DisplacementCloud{
 	boolean flockToField; 
 	boolean randoWalk; 
 	boolean disperse; 
+	boolean goHome; 
 
 
 	//CONSTRUCTOR
 	DisplacementCloud(PImage inputImage){
-		imageCloud = new PixelParticleSystem(inputImage, 1);
+		imageCloud = new PixelParticleSystem(inputImage, 2);
 		lavaLamp = false; 
 		flockToField = false; 
 		randoWalk = false; 
@@ -54,18 +55,19 @@ class DisplacementCloud{
 			lavaLamp = true; 
 		}
 		if(state == false){
-			
+			lavaLamp = false; 
 		}
-		else{
+		else {
 			println("ERROR: Input must be true / false. lavaLamp mode is currently " + lavaLamp + ".");
 		}
 	}
 
-	void flockToField(int state){
-		if(state >=1){
+	void flockToField(boolean state){
+		if(state == true ){
 			flockToField = true; 
+			println("This was executed.");
 		}
-		if(state == 0){
+		if(state == false ){
 			flockToField = false;
 		}
 		else {
@@ -97,8 +99,24 @@ class DisplacementCloud{
 		}
 	}
 
+	void goHome(boolean state){
+		if(state == true){
+			goHome = true;
+			lavaLamp = false; 
+			flockToField = false; 
+			randoWalk = false; 
+			disperse = false; 
+		}
+		if(state == false){
+			goHome = false;
+		}
+		else{
+			println("ERROR: Input must be true / false. goHome mode is currently " + goHome + ".");
+		}
+	}
+
 	void run() {
-		imageCloud.run(lavaLamp, flockToField, randoWalk, disperse);
+		imageCloud.run(lavaLamp, flockToField, randoWalk, disperse, goHome);
 	}
 
 
