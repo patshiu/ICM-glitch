@@ -10,14 +10,15 @@ void setup() {
   // size(566,542);
   // im=loadImage("che.png");
 
-  size(im.width, im.height);
   im = loadImage("palette.png");
+
+  size(im.width, im.height);
   background(0);
 }
 
 void mouseMoved() {
-  MAX_ASPECT = mouseY/8.0;
-  MIN_SIZE = 11.0-(mouseX/51.2);
+  MAX_ASPECT = map( mouseY, 0, height, 1.0, 65.0);
+  MIN_SIZE = map( mouseX, 0, width, width/10, 2.0);
 }
 
 void splitImage(float x, float y, float w, float h) {
