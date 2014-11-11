@@ -1,0 +1,30 @@
+System 
+
+
+Each particle as the ability to calculate it's next position
+It needs to know if these filters are on: 
+1. Lavalamp
+2. flockField
+3. randoWalk
+4. disperse
+
+Each particle in the system checks all 4 filters and apply the forces to calculate new position. 
+
+The each particle displays itself. 
+
+1. Check status of forces
+2. Apply the forces
+3. Calculate the final force
+4. Apply to particle, repeat for all particles. 
+
+
+--------
+Next Steps 
+1. UI — pick-an-image start screen — Pat
+2. UI - sliders and toggle for particle sys
+3. Import — full screen 
+
+Questions for Class
+---- 
+1. How to browse local disk for images? 
+2. 

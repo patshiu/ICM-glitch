@@ -17,16 +17,13 @@ class CheGlitch {
     MAX_ASPECT = 65.0; 
     MIN_SIZE = 2.0; 
     updateImg();
-    x = 0; 
-    y = 0; 
-    w = img.width;
-    h = img.height;
   }
 
 
   //The method updates img to whatever's showing on the canvas
   void updateImg() {
-    img = get();
+    //img = get();
+    img = loadImage("data/gilmore.jpg");
   }
 
   //This method update the glitch factor params according to mouse position
@@ -37,7 +34,6 @@ class CheGlitch {
 
   //Apply the glitch
   void splitImage(float x, float y, float w, float h) {
-
     // abandon squares whose aspect ratio is too high
     // e.g. width is 16x height, or vice versa
     boolean ok = ( w/h < MAX_ASPECT && h/w < MAX_ASPECT );
@@ -49,20 +45,22 @@ class CheGlitch {
       // fill with the average colour of pixels in the rectangle
       // shouldn't take too long as the size is restricted
       int area = 0;
-      float lumR = 0, lumG = 0, lumB=0;
+      float lumR = 0, lumG = 0, lumB=0, sqAlpha=0;
       for (float xx=x; xx<x+w; xx++) {
         for (float yy=y; yy<y+h; yy++) {
           area++;
-          int c=im.pixels[(int)yy*im.width+(int)xx];
+          int c = img.pixels[(int)yy*img.width + (int)xx];
           lumB+=(c&0xFF);
           lumG+=((c&0xFF00)>>8);
           lumR+=((c&0xFF0000)>>16);
         }
       }
+      sqAlpha = random(50,100); //!!! Added random alpha here
       lumR/=area;
       lumG/=area;
       lumB/=area;
-      fill(lumR, lumG, lumB);
+
+      fill(lumR, lumG, lumB, sqAlpha);
       noStroke();
       rect(x,y,w,h);
       // ellipse(x, y, w, h);
@@ -74,7 +72,7 @@ class CheGlitch {
     // (1) two rectangles vertically
     // (2) into quarters
 
-    int splittype=(int)random(2);
+    int splittype=(int)random(2); //!!This might never round to 2
     switch(splittype) { //switch Works like an if else structure
       case (0): 
       {
@@ -107,28 +105,3 @@ class CheGlitch {
   }
 }
 
-
-CheGlitch cheGlitchObject;
-
-void setup() {
-  // size(566,542);
-  // im=loadImage("che.png");  
-  im = loadImage("palette.png");
-  size(im.width, im.height);
-  image(im, 0, 0);
-  cheGlitchObject = new CheGlitch();
-  background(0);
-}
-
-void mouseMoved() {
-  cheGlitchObject.updateGlitchParams();
-}
-
-
-
-void draw() {
-  filter(INVERT); //this really glitches it up, basic color inversion
-  tint(255, 125);
-  //splitImage(0, 0, im.width, im.height);
-  cheGlitchObject.splitImage(0, 0, im.width, im.height);
-}
