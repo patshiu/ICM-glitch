@@ -11,6 +11,8 @@ class PixelParticle {
 
 	float maxForce;
 	float maxSpeed;
+	float maxForceGoHome;
+	float maxSpeedGoHome;
 	
 	color c; 
 	boolean isDead;
@@ -25,7 +27,9 @@ class PixelParticle {
 		mass = 1; 
 
 		maxForce = 8; 
+		maxForceGoHome = 18; 
 		maxSpeed = 0.6; 
+		maxSpeedGoHome = 1.2; 
 
 		c =  motherImg.get(x, y);
 		isDead = false;
@@ -40,6 +44,12 @@ class PixelParticle {
 	void applyForce(PVector acceleration){
 		velocity = PVector.add(velocity, acceleration, friction);
 		velocity.limit(maxSpeed);
+		location = PVector.add(location, velocity); 
+	}
+
+	void applyForceGoHome(PVector acceleration){
+		velocity = PVector.add(velocity, acceleration, friction);
+		velocity.limit(maxSpeedGoHome);
 		location = PVector.add(location, velocity); 
 	}
 
@@ -58,8 +68,8 @@ class PixelParticle {
 		PVector desired = PVector.sub(home, location);
 		desired.limit(2);
 		PVector steer = PVector.sub(desired, velocity);
-		steer.limit(maxForce);
-		applyForce(steer);
+		steer.limit(maxForceGoHome);
+		applyForceGoHome(steer);
 	}
 
 	void disperse(){

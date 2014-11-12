@@ -7,7 +7,7 @@
 //Check out control p5 lib
 //* * * * * * *
 
-// import controlP5.*;
+import controlP5.*;
 
 //Import button 
 
@@ -27,19 +27,19 @@
 
 //Export button 
 
-// void UIsetup(){
+void UIsetup(){
 
-// 	cp5 = new ControlP5(this);
+	cp5 = new ControlP5(this);
 
-// 	cp5.addSlider("sliderValue")
-// 	.setPosition(-200,50)
-// 	.setSize(100, 20)
-// 	.setRange(0,255)
-// 	//.setNumberOfTickMarks(5)
-// 	;
+	cp5.addSlider("sliderValue")
+	.setPosition(-200,50)
+	.setSize(100, 20)
+	.setRange(0,255)
+	//.setNumberOfTickMarks(5)
+	;
 
-// 	cp5.addSlider("sliderValue2")
-// 	.setPosition(-200,100)
-// 	.setRange(0,255)
-// 	;
-// }
+	cp5.addSlider("sliderValue2")
+	.setPosition(-200,100)
+	.setRange(0,255)
+	;
+}

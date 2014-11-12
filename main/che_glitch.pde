@@ -23,7 +23,7 @@ class CheGlitch {
   //The method updates img to whatever's showing on the canvas
   void updateImg() {
     //img = get();
-    img = loadImage("data/gilmore.jpg");
+    img = loadImage("data/palette.png");
   }
 
   //This method update the glitch factor params according to mouse position
