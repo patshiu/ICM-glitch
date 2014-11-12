@@ -55,7 +55,7 @@ class CheGlitch {
           lumR+=((c&0xFF0000)>>16);
         }
       }
-      sqAlpha = random(50,100); //!!! Added random alpha here
+      sqAlpha = random(100,200); //!!! Added random alpha here
       lumR/=area;
       lumG/=area;
       lumB/=area;

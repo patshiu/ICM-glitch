@@ -18,6 +18,7 @@ void setup() {
 	
 	background(0);
 	testImg = loadImage("data/gilmore.jpg");
+	//size(testImg.width, testImg.height, OPENGL);
 	size(displayWidth, displayHeight, OPENGL);
 	imgCloud = new DisplacementCloud(testImg);
 	sketchPad = createGraphics(testImg.width, testImg.height);
@@ -37,9 +38,10 @@ void setup() {
 
 void draw() {
 	background(0);
-	int x = displayWidth - testImg.width/2; 
-	int y = displayHeight - testImg.height/2; 
+ 	float x = (width - testImg.width)/2;
+ 	float y = (height - testImg.height)/2;
 	translate( x, y );
+	imgCloud.translate( x, y );
 
 	//rect(0,0, height, width); //draw a background of random color picked from original imaged
 	imgCloud.run();

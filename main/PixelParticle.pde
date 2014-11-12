@@ -1,4 +1,4 @@
-
+	
 
 
 class PixelParticle {
@@ -6,16 +6,18 @@ class PixelParticle {
 	PVector location; 
 	PVector velocity; 
 	PVector friction; 
+	
 	float mass; 
 
 	float maxForce;
 	float maxSpeed;
-
+	
 	color c; 
 	boolean isDead;
 
 	//Constructor
 	PixelParticle( PImage motherImg, int x, int y) {
+
 		home = new PVector(x, y);
 		location = home; 
 		velocity = new PVector(0,0); 
@@ -41,8 +43,8 @@ class PixelParticle {
 		location = PVector.add(location, velocity); 
 	}
 
-	void display(){
-		set(int(location.x), int(location.y), c);
+	void display( float translateX, float translateY ){
+		set(int(location.x + translateX), int(location.y + translateY), c);
 		updatePixels();
 	}
 
@@ -63,7 +65,6 @@ class PixelParticle {
 	void disperse(){
 		randoWalk();
 		offScreenCheck();
-		display();
 	}
 
 	void goHome(){
@@ -105,13 +106,18 @@ class PixelParticle {
 
 	void run(boolean lavaLamp, boolean flockToField, FlowField flowField, boolean randoWalk, boolean disperse, boolean goHome){
 		updateParticle( lavaLamp, flockToField, flowField, randoWalk, disperse, goHome);
-		display();
 	}
+
 }
 
 class PixelParticleSystem {
 	ArrayList<PixelParticle> pixelCloud; 
+	PGraphics sketchPad; //Particles get "set()" here then drawn to canvas, so that "translate()" in the main canvas works
 	boolean disperse; //If true, particle disperse, if false, particle return home.
+
+	//TO MAKE TRANSLATE COMPATIBLE 
+	float translateX; 
+	float translateY; 
 
 	//These support flockToField 
 	FlowField flowField; 
@@ -119,10 +125,15 @@ class PixelParticleSystem {
 
 	PixelParticleSystem(PImage inputImage, float resolution){
 		float resConstrain = constrain(resolution, 1, inputImage.width/2);
+		sketchPad = createGraphics(width, height);
 		pixelCloud = new ArrayList<PixelParticle>(); 
 		disperse = false;
 		flowField = new FlowField(); 
 		inputImage.loadPixels();
+
+		translateX = 0; 
+		translateY = 0; 
+
 		for (int i = 0; i < inputImage.pixels.length; i++){
 			
 			int x; 
@@ -153,28 +164,18 @@ class PixelParticleSystem {
 		}
 	}	
 
-	void oldRun(){ //THIS NEEDS TO BE REMOVED
-		for (int i = pixelCloud.size()-1; i > 0 ; i--){
-			PixelParticle currentPixel = pixelCloud.get(i);
-/*			if(currentPixel.isDead == true){
-				pixelCloud.remove(i); 
-				println("Particle removed, current size is " + pixelCloud.size() );
-			}
-			else {*/
-				if(disperse == true){
-					currentPixel.disperse();
-				}
-				else{
-					currentPixel.goHome();
-				}
-/*			}*/
-		}
-	}
 	void run(boolean lavaLamp, boolean flockToField, boolean randoWalk, boolean disperse, boolean goHome){
 		for (int i = pixelCloud.size()-1; i > 0 ; i--){
 			PixelParticle currentPixel = pixelCloud.get(i);
 			currentPixel.run( lavaLamp, flockToField, flowField, randoWalk, disperse, goHome);
+			currentPixel.display( translateX, translateY );
 		}
+		//image(sketchPad, 0, 0);
+	}
+
+	void translate(float x, float y){
+		translateX = x; 
+		translateY = y; 
 	}
 }
 

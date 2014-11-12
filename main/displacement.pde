@@ -119,6 +119,12 @@ class DisplacementCloud{
 		imageCloud.run(lavaLamp, flockToField, randoWalk, disperse, goHome);
 	}
 
+	//UTILITY FUNCTION TO HELP TRANSLATE WORK
+	void translate(float x, float y){
+		imageCloud.translate(x, y);
+
+	}
+
 
 
 
