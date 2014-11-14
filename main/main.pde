@@ -84,6 +84,7 @@ void setup() {
 }
 
 void draw() {
+
 	background(0);
  	float x = (width - testImg.width)/2;
  	float y = (height - testImg.height)/2;
@@ -102,6 +103,9 @@ void draw() {
 		gifExport.setDelay(1);
 	  	gifExport.addFrame();
   	}
+
+  	//DRAW UI
+  	drawUI();
 }
 
 void mousePressed(){
@@ -118,6 +122,8 @@ void mousePressed(){
 		println(toggleDisperse);
 
 	}
+	toggleHeader();	
+	toggleSidebar();
 }
 
 void mouseMoved() {
