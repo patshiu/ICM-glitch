@@ -112,42 +112,61 @@ void draw() {
   	//DRAW UI
   	drawUI();
 
-	if (mousePressed == true) {
+/*	if (mousePressed == true) {
 		if (squareGlitchSize.isUnderCursor() == true){
 			squareGlitchSize.setValue(mouseX);
-			println("Setting squareGlitchSize value to " + mouseX );
+			//println("Setting squareGlitchSize value to " + mouseX );
 		}
-	} 
 
-	println("Mouse is at " + mouseX + ", " + mouseY );
+		if (squareGlitchAspect.isUnderCursor() == true){
+			squareGlitchAspect.setValue(mouseX);
+			//println("Setting squareGlitchAspect value to " + mouseX );
+		}
+
+	} */
+}
+
+void mouseDragged() {
+	if (squareGlitchSize.isUnderCursor() == true){
+			squareGlitchSize.setValue(mouseX);
+			//println("Setting squareGlitchSize value to " + mouseX );
+		}
+
+		if (squareGlitchAspect.isUnderCursor() == true){
+			squareGlitchAspect.setValue(mouseX);
+			//println("Setting squareGlitchAspect value to " + mouseX );
+		}
 }
 
 void mousePressed(){
-	if( imgCloud.goHome == false){
-		imgCloud.goHome(true);
-		//disperseToggler.toggle();
-		//println(toggleDisperse);
 
+	if (squareGlitchOnOff.isUnderCursor() == true){
+		squareGlitchOnOff.toggle();
+			if( squareGlitchOnOff.isOn == false){
+				cheGlitchObject.isOn = false; 
+			}
+			else {
+				cheGlitchObject.isOn = true;
+			}
 	}
-	else {
-		imgCloud.flockToField(true);
-		imgCloud.goHome(false);
-		//disperseToggler.toggle();
-		//println(toggleDisperse);
 
+	if (driftToggle.isUnderCursor() == true){
+		driftToggle.toggle();
+			if( driftToggle.isOn == false){
+				imgCloud.goHome(true);
+			}
+			else {
+				imgCloud.flockToField(true);
+				imgCloud.goHome(false);
+			}
 	}
+
 /*	toggleHeader();	
 	toggleSidebar();*/
 }
 
 void mouseMoved() {
 	cheGlitchObject.updateGlitchParams();
-/*	sliderMinSize = int(map(mouseX, 0, width, 0, 255));
-	xSlider.setValue(sliderMinSize);
-
-	sliderAspect = int(map(mouseY, 0, height, 0, 255));
-	ySlider.setValue(sliderAspect);
-	println("sliderMinSize : " + sliderMinSize + "   sliderAspect : " + sliderAspect);*/
 }
 
 

@@ -52,6 +52,13 @@ class ToggleBtn {
 		return toggleBtnCanvas;
 	}
 
+
+	void setCanvasLoc(float x, float y) {
+		locX = x; 
+		locY = y;
+	}
+
+
 	Boolean isUnderCursor() {
 		if( mouseX >= locX && mouseX <= (locX + btnOn.width) && mouseY >= locY && mouseY <= (locY + btnOn.height)){
 			return true; 
