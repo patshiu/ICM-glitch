@@ -52,37 +52,6 @@ void setup() {
 	}
 
 
-/*	cp5 = new ControlP5(this);
-
-	xSlider = cp5.addSlider("sliderMinSize")
-	.setPosition(100,50)
-	.setSize(100, 20)
-	.setRange(0,255)
-	.setColorBackground(color(255,0,0))
-	.setColorForeground(color(0,0,255))
-	.setColorActive(color(0,0,255));	
-	//.setNumberOfTickMarks(5)
-	;
-
-	ySlider = cp5.addSlider("sliderAspect")
-	.setPosition(100,100)
-	.setSize( 20, 100)
-	.setRange(255, 0)
-	.setColorBackground(color(255,0,0))
-	.setColorForeground(color(0,0,255))
-	.setColorActive(color(0,0,255));	
-	;
-
-	// create a toggle
-	disperseToggler = cp5.addToggle("toggleDisperse")
-	.setPosition(100,250)
-	.setSize(50,20)
-	.setColorBackground(color(255,0,0))
-	.setColorForeground(color(0,0,255))
-	.setColorActive(color(0,255,0));	
-	;*/
-
-
 	//Setup fonts
 	ProximaNova = loadFont("ProximaNova-Regular-12.vlw");
 	ProximaNovaBold = loadFont("ProximaNova-Semibold-20.vlw");
@@ -142,7 +111,7 @@ void mousePressed(){
 
 	if (squareGlitchOnOff.isUnderCursor() == true){
 		squareGlitchOnOff.toggle();
-			if( squareGlitchOnOff.isOn == false){
+			if( squareGlitchOnOff.isOn == false){`
 				cheGlitchObject.isOn = false; 
 			}
 			else {
