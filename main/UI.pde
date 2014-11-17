@@ -92,9 +92,25 @@ void addSidebar(){
 	sidebar.rect( 0, 0, sidebarWidth, sidebar.height);
 	sidebar.fill( 0, 0, 255); //Holder for filter settings
 	sidebar.rect( 10, 20, sidebarWidth-20, 400);
-	sidebar.image(squareGlitchSize.show(), 20, 40);
-	squareGlitchSize.setCanvasLoc(20 + sidebarPos , 40 + headerHeight + 10); 
-	println(squareGlitchSize.locX + " , " + squareGlitchSize.locY );
+
+	//Adding squareGlitchToggle
+	sidebar.image(squareGlitchOnOff.show(), 0, 40);
+	squareGlitchOnOff.setCanvasLoc( 0 + sidebarPos , 40 + headerHeight + 10);
+
+	//Adding squareGlitchAspect slider
+	sidebar.image(squareGlitchAspect.show(),20, 90);
+	squareGlitchAspect.setCanvasLoc( 20 + sidebarPos , 90 + headerHeight + 10);
+	
+
+	//Adding squareGlitchSize slider
+	sidebar.image(squareGlitchSize.show(), 20, 130);
+	squareGlitchSize.setCanvasLoc( 20 + sidebarPos , 130 + headerHeight + 10); 
+	
+	//Adding driftGlitch toggle
+	sidebar.image(driftToggle.show(), 0, 200);
+	driftToggle.setCanvasLoc( 0 + sidebarPos , 200 + headerHeight + 10);
+
+
 	sidebar.rect( 10, 20 + 400 + 10, sidebarWidth-20, 400);
 	sidebar.endDraw();
 	displaySidebar();
