@@ -3,6 +3,9 @@
 //Button & Slider class defined here
 
 
+
+//TO FIX : YOUR LOGIC FOR move() IS FUCKED!!! FIX THIS
+
 class ToggleBtn {
 	boolean isOn; 
 	PImage btnOn; 
@@ -94,7 +97,7 @@ class Slider {
 
 	}
 
-	void move(float x, float y) {
+	void setCanvasLoc(float x, float y) {
 		locX = x; 
 		locY = y;
 	}
@@ -102,15 +105,14 @@ class Slider {
 	PGraphics show(){ //THIS RETURNS A PGRAPHICS
 		sliderCanvas.beginDraw();
 		sliderCanvas.clear();
-		sliderCanvas.image(sliderLine, locX, locY);
-		sliderCanvas.image(sliderBtn, locBtn, locY);
+		sliderCanvas.image(sliderLine, 0, 0);
+		sliderCanvas.image(sliderBtn, locBtn, 0);
 		sliderCanvas.endDraw();
 		return sliderCanvas;
 	}
 
 	boolean isUnderCursor() {
-		//if( mouseX >= locX && mouseX <= (locX + sliderLine.width) && mouseY >= locY && mouseY <= (locY + sliderLine.height)){
-		if( mouseX >= locX && mouseX <= sliderLine.width && mouseY >= 60 && mouseY <= 100 ) {
+		if( mouseX >= locX && mouseX <= (locX + sliderLine.width) && mouseY >= locY && mouseY <= (locY + sliderLine.height) ) {
 			return true; 
 		} else {
 			return false;

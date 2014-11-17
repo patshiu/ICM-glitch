@@ -92,6 +92,9 @@ void addSidebar(){
 	sidebar.rect( 0, 0, sidebarWidth, sidebar.height);
 	sidebar.fill( 0, 0, 255); //Holder for filter settings
 	sidebar.rect( 10, 20, sidebarWidth-20, 400);
+	sidebar.image(squareGlitchSize.show(), 20, 40);
+	squareGlitchSize.setCanvasLoc(20 + sidebarPos , 40 + headerHeight + 10); 
+	println(squareGlitchSize.locX + " , " + squareGlitchSize.locY );
 	sidebar.rect( 10, 20 + 400 + 10, sidebarWidth-20, 400);
 	sidebar.endDraw();
 	displaySidebar();
@@ -111,7 +114,6 @@ void initSidebar() { //sets up sidebar
 	squareGlitchOnOff = new ToggleBtn(true, 0, 0);
 	squareGlitchSize = new Slider(100, 0, 0); //Make sure slider inits with right button position
 	squareGlitchAspect = new Slider(50, 0, 0);
-
 
 }
 

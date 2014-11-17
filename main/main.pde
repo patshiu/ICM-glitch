@@ -111,6 +111,15 @@ void draw() {
 
   	//DRAW UI
   	drawUI();
+
+	if (mousePressed == true) {
+		if (squareGlitchSize.isUnderCursor() == true){
+			squareGlitchSize.setValue(mouseX);
+			println("Setting squareGlitchSize value to " + mouseX );
+		}
+	} 
+
+	println("Mouse is at " + mouseX + ", " + mouseY );
 }
 
 void mousePressed(){
