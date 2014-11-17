@@ -53,9 +53,11 @@ class DisplacementCloud{
 	void lavaLamp(boolean state){
 		if(state == true){
 			lavaLamp = true; 
+			return;
 		}
 		if(state == false){
 			lavaLamp = false; 
+			return;
 		}
 		else {
 			println("ERROR: Input must be true / false. lavaLamp mode is currently " + lavaLamp + ".");
@@ -65,10 +67,11 @@ class DisplacementCloud{
 	void flockToField(boolean state){
 		if(state == true ){
 			flockToField = true; 
-			println("This was executed.");
+			return;
 		}
 		if(state == false ){
 			flockToField = false;
+			return;
 		}
 		else {
 			println("ERROR: Input must be true / false. flockToField mode is currently " + flockToField + ".");
@@ -78,9 +81,11 @@ class DisplacementCloud{
 	void randoWalk(boolean state){
 		if(state == true){
 			randoWalk = true; 
+			return;
 		}
 		if(state == false){
 			randoWalk = false; 
+			return;
 		}
 		else {
 			println("ERROR: Input must be true / false. randoWalk mode is currently " + randoWalk + ".");
@@ -90,9 +95,11 @@ class DisplacementCloud{
 	void disperse(boolean state){
 		if(state == true){
 			disperse = true; 
+			return;
 		}
 		if(state == false){
 			disperse = false; 
+			return;
 		}
 		else{
 			println("ERROR: Input must be true / false. disperse mode is currently " + disperse + ".");
@@ -105,10 +112,12 @@ class DisplacementCloud{
 			lavaLamp = false; 
 			flockToField = false; 
 			randoWalk = false; 
-			disperse = false; 
+			disperse = false;
+			return; 
 		}
 		if(state == false){
 			goHome = false;
+			return;
 		}
 		else{
 			println("ERROR: Input must be true / false. goHome mode is currently " + goHome + ".");
