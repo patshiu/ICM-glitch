@@ -88,17 +88,22 @@ class Slider {
 
 		//If mouse press is valid, then move sliderBtn to the correct location on slider
 		//Update "sliderValue" to match, using map on 
-		float valueIn = input - locX; 
-		locBtn = constrain(valueIn, 15, sliderLine.width - sliderBtn.width - 15);
-		sliderValue = map(locBtn, 15, sliderLine.width - sliderBtn.width - 15, 0, 255);
+		float valueIn = input - locX; //convert MouseX to pos of mouse on slider
+		locBtn = constrain(valueIn, 15, sliderLine.width - sliderBtn.width - 15); //Calculate the position of the sliderbutton (from edge of slider)
+		sliderValue = map(locX + locBtn, locX + 15, locX + sliderLine.width - sliderBtn.width - 15, 0, 255);
 
+	}
+
+	void move(float x, float y) {
+		locX = x; 
+		locY = y;
 	}
 
 	PGraphics show(){ //THIS RETURNS A PGRAPHICS
 		sliderCanvas.beginDraw();
 		sliderCanvas.clear();
-		sliderCanvas.image(sliderLine, 0, 0);
-		sliderCanvas.image(sliderBtn, locBtn, 0);
+		sliderCanvas.image(sliderLine, locX, locY);
+		sliderCanvas.image(sliderBtn, locBtn, locY);
 		sliderCanvas.endDraw();
 		return sliderCanvas;
 	}

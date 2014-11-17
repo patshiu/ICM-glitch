@@ -11,7 +11,7 @@ import controlP5.*;
 PFont ProximaNova;
 PFont ProximaNovaBold;
 
-ControlP5 cp5;
+//ControlP5 cp5;
 
 
 PImage testImg; 
@@ -51,9 +51,8 @@ void setup() {
 		// (e.g. the website bg-color). Like this you can have the antialiasing from processing in the gif.
 	}
 
-	//UIsetup();
 
-	cp5 = new ControlP5(this);
+/*	cp5 = new ControlP5(this);
 
 	xSlider = cp5.addSlider("sliderMinSize")
 	.setPosition(100,50)
@@ -81,7 +80,7 @@ void setup() {
 	.setColorBackground(color(255,0,0))
 	.setColorForeground(color(0,0,255))
 	.setColorActive(color(0,255,0));	
-	;
+	;*/
 
 
 	//Setup fonts
@@ -117,15 +116,15 @@ void draw() {
 void mousePressed(){
 	if( imgCloud.goHome == false){
 		imgCloud.goHome(true);
-		disperseToggler.toggle();
-		println(toggleDisperse);
+		//disperseToggler.toggle();
+		//println(toggleDisperse);
 
 	}
 	else {
 		imgCloud.flockToField(true);
 		imgCloud.goHome(false);
-		disperseToggler.toggle();
-		println(toggleDisperse);
+		//disperseToggler.toggle();
+		//println(toggleDisperse);
 
 	}
 /*	toggleHeader();	
@@ -134,12 +133,12 @@ void mousePressed(){
 
 void mouseMoved() {
 	cheGlitchObject.updateGlitchParams();
-	sliderMinSize = int(map(mouseX, 0, width, 0, 255));
+/*	sliderMinSize = int(map(mouseX, 0, width, 0, 255));
 	xSlider.setValue(sliderMinSize);
 
 	sliderAspect = int(map(mouseY, 0, height, 0, 255));
 	ySlider.setValue(sliderAspect);
-	println("sliderMinSize : " + sliderMinSize + "   sliderAspect : " + sliderAspect);
+	println("sliderMinSize : " + sliderMinSize + "   sliderAspect : " + sliderAspect);*/
 }
 
 

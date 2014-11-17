@@ -17,10 +17,10 @@ PGraphics sidebar;
 //Element for header
 
 //Elements for drift glitch
-Toggle driftToggle; 
+ToggleBtn driftToggle; 
 
 //Elements for square glitch
-Toggle squareGlitchOnOff; 
+ToggleBtn squareGlitchOnOff; 
 Slider squareGlitchSize; 
 Slider squareGlitchAspect; 
 
@@ -105,10 +105,10 @@ void initSidebar() { //sets up sidebar
 
 	//set up all the control elements
 	//Elements for Drift Glitch
-	driftToggle = new Toggle(true, 0, 0);
+	driftToggle = new ToggleBtn(true, 0, 0);
 
 	//Elements for Square Glitch
-	squareGlitchOnOff = new Toggle(true, 0, 0);
+	squareGlitchOnOff = new ToggleBtn(true, 0, 0);
 	squareGlitchSize = new Slider(100, 0, 0); //Make sure slider inits with right button position
 	squareGlitchAspect = new Slider(50, 0, 0);
 
