@@ -14,7 +14,15 @@ float sidebarPos;
 boolean sidebarInFull = true; 
 PGraphics sidebar; 
 
+//Element for header
 
+//Elements for drift glitch
+Toggle driftToggle; 
+
+//Elements for square glitch
+Toggle squareGlitchOnOff; 
+Slider squareGlitchSize; 
+Slider squareGlitchAspect; 
 
 void drawUI(){
 	addHeader();
@@ -30,7 +38,10 @@ void addHeader(){
 
 	headerBar.beginDraw();
 	headerBar.fill(255, 0, 0);
-	headerBar.rect(0, 0, width, headerHeight);
+	headerBar.rect(0, 0, width, headerHeight); 
+	headerBar.rect(10,5, 300, 38); //Holder for logo
+	headerBar.fill( 0, 0, 255); //Holder for btns
+	headerBar.rect(width - 510, 5, 500, 38);
 	headerBar.endDraw();
 	displayHeader();
 }
@@ -74,15 +85,34 @@ void displayHeader(){
 //This adds the sidebar control panel 
 void addSidebar(){
 	if (sidebar == null){
-		sidebar = createGraphics(sidebarWidth, height - headerHeight - 20); 
-		sidebarPos = width - sidebarWidth;
+		initSidebar();
 	}
 	sidebar.beginDraw();
 	sidebar.fill(255, 0, 0);
 	sidebar.rect( 0, 0, sidebarWidth, sidebar.height);
+	sidebar.fill( 0, 0, 255); //Holder for filter settings
+	sidebar.rect( 10, 20, sidebarWidth-20, 400);
+	sidebar.rect( 10, 20 + 400 + 10, sidebarWidth-20, 400);
 	sidebar.endDraw();
 	displaySidebar();
 	
+}
+
+void initSidebar() { //sets up sidebar
+	//set up sidebar canvas
+	sidebar = createGraphics(sidebarWidth, height - headerHeight - 20); 
+	sidebarPos = width - sidebarWidth;
+
+	//set up all the control elements
+	//Elements for Drift Glitch
+	driftToggle = new Toggle(true, 0, 0);
+
+	//Elements for Square Glitch
+	squareGlitchOnOff = new Toggle(true, 0, 0);
+	squareGlitchSize = new Slider(100, 0, 0); //Make sure slider inits with right button position
+	squareGlitchAspect = new Slider(50, 0, 0);
+
+
 }
 
 void toggleSidebar() {

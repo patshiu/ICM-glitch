@@ -8,6 +8,8 @@ import processing.opengl.*;
 
 import controlP5.*;
 
+PFont ProximaNova;
+PFont ProximaNovaBold;
 
 ControlP5 cp5;
 
@@ -81,6 +83,10 @@ void setup() {
 	.setColorActive(color(0,255,0));	
 	;
 
+
+	//Setup fonts
+	ProximaNova = loadFont("ProximaNova-Regular-12.vlw");
+	ProximaNovaBold = loadFont("ProximaNova-Semibold-20.vlw");
 }
 
 void draw() {
@@ -122,8 +128,8 @@ void mousePressed(){
 		println(toggleDisperse);
 
 	}
-	toggleHeader();	
-	toggleSidebar();
+/*	toggleHeader();	
+	toggleSidebar();*/
 }
 
 void mouseMoved() {
