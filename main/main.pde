@@ -33,7 +33,7 @@ boolean toggleDisperse = true;
 
 void setup() {
 	
-	background(0);
+	background(#222222);
 	testImg = loadImage("data/palette.png");
 	//size(testImg.width, testImg.height, OPENGL);
 	size(displayWidth, displayHeight, OPENGL);
@@ -90,7 +90,7 @@ void setup() {
 
 void draw() {
 
-	background(0);
+	background(#222222);
  	float x = (width - testImg.width)/2;
  	float y = (height - testImg.height)/2;
  	pushMatrix();
@@ -161,8 +161,23 @@ void mousePressed(){
 			}
 	}
 
-/*	toggleHeader();	
-	toggleSidebar();*/
+	if (importBtn.isUnderCursor() == true){
+		println("Import button was pressed");
+	}
+
+	if (resetBtn.isUnderCursor() == true){
+		println("Reset button was pressed");
+	}
+
+	if ( pauseBtn.isUnderCursor() == true){
+		println("Pause button was pressed");
+	}
+
+	if (exportBtn.isUnderCursor() == true){
+		println("Export button was pressed");
+		saveFrame("exportedImage_##.jpg");
+	}
+
 }
 
 void mouseMoved() {
@@ -171,10 +186,20 @@ void mouseMoved() {
 
 
 void keyPressed() {
-	if ( GIFEXPORTMODE == true){
-  		gifExport.finish();
-  		println("gif saved");
-  	}
+	println(keyCode); 
+
+	if (keyCode == 9){ //If "tab" is hit, toggle the UI
+		toggleHeader();
+		toggleSidebar();
+	}
+
+	if (keyCode == 80){ //If "p" is hit, "print" gif
+		if ( GIFEXPORTMODE == true){
+				gifExport.finish();
+				println("gif saved");
+			}
+	}
+
 }
 
 

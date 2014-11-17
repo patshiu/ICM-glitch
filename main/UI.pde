@@ -4,7 +4,7 @@
 
 //This adds the top bar
 
-int headerHeight = 48; 
+int headerHeight = 10 + 44 + 15; // Top Padding + button height + Bottom Padding
 float headerPos = 0; 
 boolean headerInFull = true;
 PGraphics headerBar; //NOTE: This MUST be declared in setup 
@@ -14,7 +14,11 @@ float sidebarPos;
 boolean sidebarInFull = true; 
 PGraphics sidebar; 
 
-//Element for header
+//Elements for header
+Btn importBtn;
+Btn resetBtn; 
+Btn pauseBtn; 
+Btn exportBtn; 
 
 //Elements for drift glitch
 ToggleBtn driftToggle; 
@@ -30,20 +34,44 @@ void drawUI(){
 }
 
 
+
+
 //This adds the top bar
 void addHeader(){
 	if (headerBar == null){
-		headerBar = createGraphics(width, headerHeight); 
+		headerInit();
 	}
-
 	headerBar.beginDraw();
-	headerBar.fill(255, 0, 0);
+	headerBar.fill(50, 50, 50);
 	headerBar.rect(0, 0, width, headerHeight); 
 	headerBar.rect(10,5, 300, 38); //Holder for logo
-	headerBar.fill( 0, 0, 255); //Holder for btns
-	headerBar.rect(width - 510, 5, 500, 38);
+	
+	//Import btn
+	headerBar.image(importBtn.show(), width - importBtn.state1.width - 20 - resetBtn.state1.width - 20 - pauseBtn.state1.width - 20 - exportBtn.state1.width - 10, 10);
+	importBtn.setCanvasLoc(width - importBtn.state1.width - 20 - resetBtn.state1.width - 20 - pauseBtn.state1.width - 20 - exportBtn.state1.width - 10, headerPos + 10);
+
+	//Reset btn
+	headerBar.image(resetBtn.show(), width - resetBtn.state1.width - 20 - pauseBtn.state1.width - 20 - exportBtn.state1.width - 10, 10);
+	resetBtn.setCanvasLoc(width - resetBtn.state1.width - 20 - pauseBtn.state1.width - 20 - exportBtn.state1.width - 10, headerPos + 10);
+
+	//Pause btn
+	headerBar.image(pauseBtn.show(), width - pauseBtn.state1.width - 20 - exportBtn.state1.width - 10, 10);
+	pauseBtn.setCanvasLoc(width - pauseBtn.state1.width - 20 - exportBtn.state1.width - 10, headerPos - 10);
+	
+	//Export btn
+	headerBar.image(exportBtn.show(), width - exportBtn.state1.width - 10, 10);
+	exportBtn.setCanvasLoc(width - exportBtn.state1.width - 10, headerPos - 10);
+	
 	headerBar.endDraw();
 	displayHeader();
+}
+
+void headerInit(){
+	headerBar = createGraphics(width, headerHeight); //Set up header canvas
+	importBtn = new Btn("btn_import.png");
+	resetBtn = new Btn("btn_reset.png");
+	pauseBtn = new Btn("btn_pause.png");
+	exportBtn = new Btn("btn_export.png");
 }
 
 //This hides / unhides the header

@@ -15,7 +15,7 @@ class PixelParticle {
 	float maxSpeedGoHome;
 	
 	color c; 
-	boolean isDead;
+	boolean isOffCanvas;
 
 	//Constructor
 	PixelParticle( PImage motherImg, int x, int y) {
@@ -27,12 +27,12 @@ class PixelParticle {
 		mass = 1; 
 
 		maxForce = 8; 
-		maxForceGoHome = 18; 
+		maxForceGoHome = 38; 
 		maxSpeed = 0.6; 
-		maxSpeedGoHome = 1.2; 
+		maxSpeedGoHome = 6.2; 
 
 		c =  motherImg.get(x, y);
-		isDead = false;
+		isOffCanvas = false;
 	}
 
 	void randoWalk(){
@@ -54,13 +54,42 @@ class PixelParticle {
 	}
 
 	void display( float translateX, float translateY ){
+		loopScreenEdges(translateX, translateY);
+		//loopScreenEdges();
+
+		//x @ 0 - translateX ; then set x to width - translateX
+		//x @ at width - translateX ; then set x to 0 - translateX 
+		//y @ - translateY ; then set y to height - translateY
+
 		set(int(location.x + translateX), int(location.y + translateY), c);
+		//set(int(location.x ), int(location.y ), c);
 		updatePixels();
 	}
 
 	void offScreenCheck(){
 		if (location.x < 0 || location.y < 0 || location.x > width || location.y > height){
-			isDead = true;
+			isOffCanvas = true;
+		}
+	}
+
+	void loopScreenEdges( float translateX, float translateY ){
+
+		if (location.x < 0 - translateX + 100 ){
+			location.x = width - translateX - 100;
+			return;
+		}
+
+		if (location.x > width - translateX -100){
+			location.x = 0 - translateX + 100;
+			return;
+		}
+		if (location.y < 0 - translateY + 100){
+			location.y = height / 2 - translateY;
+			return;
+		}
+		if (location.y > height - translateY - 100){
+			location.y = height / 2 - translateY;
+			return;
 		}
 	}
 

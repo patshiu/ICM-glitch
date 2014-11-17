@@ -6,6 +6,51 @@
 
 //TO FIX : YOUR LOGIC FOR move() IS FUCKED!!! FIX THIS
 
+class Btn {
+	PImage state1; 
+	PImage state2; 
+	PGraphics btnCanvas; 
+	boolean isUnderCursor; 
+	float locX; 
+	float locY; 
+
+	Btn(String stateALoc , String stateBLoc){
+		state1 = loadImage(stateALoc); 
+		state2 = loadImage(stateBLoc); 
+		locX = 0; 
+		locY = 0; 
+		btnCanvas = createGraphics(state1.width, state1.height);
+	}
+
+	Btn(String stateALoc){
+		state1 = loadImage(stateALoc); 
+		state2 = loadImage(stateALoc); 
+		locX = 0; 
+		locY = 0; 
+		btnCanvas = createGraphics(state1.width, state1.height);
+	}
+
+	PGraphics show(){
+		btnCanvas.beginDraw();
+		btnCanvas.image(state1, 0, 0);
+		btnCanvas.endDraw();
+		return btnCanvas; 
+	}
+
+	void setCanvasLoc(float x, float y) {
+		locX = x; 
+		locY = y;
+	}
+
+	boolean isUnderCursor() {
+		if( mouseX >= locX && mouseX <= (locX + state1.width) && mouseY >= locY && mouseY <= (locY + state1.height)){
+			return true; 
+		} else {
+			return false;
+		}
+	}
+}
+
 class ToggleBtn {
 	boolean isOn; 
 	PImage btnOn; 
@@ -65,7 +110,6 @@ class ToggleBtn {
 		} else {
 			return false;
 		}
-
 	}
 }
 
