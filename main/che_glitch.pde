@@ -33,8 +33,8 @@ class CheGlitch {
 
   //This method update the glitch factor params according to mouse position
   void updateGlitchParams(){
-    MAX_ASPECT = map( squareGlitchSize.sliderValue, 0, 255, 1.0, 65.0);
-    MIN_SIZE = map( squareGlitchAspect.sliderValue, 0, 255, width/10, 2.0);
+    MAX_ASPECT = map( squareGlitchSize.sliderValue, 0, 255, 55.0, 65.0);
+    MIN_SIZE = map( squareGlitchAspect.sliderValue, 0, 255, 80.0, 2.0);
   }
 
   //Apply the glitch

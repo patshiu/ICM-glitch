@@ -36,7 +36,8 @@ void setup() {
 	background(#222222);
 	testImg = loadImage("data/face.jpg");
 	vignette = loadImage("slice_vignette.png");
-	size(1380, 850, OPENGL);
+	size(1380, 850, OPENGL); //absolute dimension
+	//size(testImg.width+100, testImg.height+100, OPENGL);
 	//size(displayWidth, displayHeight, OPENGL);
 	imgCloud = new DisplacementCloud(testImg);
 	sketchPad = createGraphics(testImg.width, testImg.height);

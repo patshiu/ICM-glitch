@@ -133,7 +133,7 @@ class Slider {
 		sliderLine = loadImage("slice_slider_spine.png");
 		locX = x; 
 		locY = y; 
-		locBtn = constrain(sliderValue, 15, sliderLine.width - sliderBtn.width - 15); 
+		locBtn = constrain(sliderValue, 0, sliderLine.width - sliderBtn.width - 0); 
 		sliderCanvas = createGraphics(sliderLine.width, sliderLine.height);
 		isUnderCursor = false; 
 	}
@@ -143,8 +143,8 @@ class Slider {
 		//If mouse press is valid, then move sliderBtn to the correct location on slider
 		//Update "sliderValue" to match, using map on 
 		float valueIn = input - locX; //convert MouseX to pos of mouse on slider
-		locBtn = constrain(valueIn, 15, sliderLine.width - sliderBtn.width - 15); //Calculate the position of the sliderbutton (from edge of slider)
-		sliderValue = map(locX + locBtn, locX + 15, locX + sliderLine.width - sliderBtn.width - 15, 0, 255);
+		locBtn = constrain(valueIn, 0, sliderLine.width - sliderBtn.width - 0); //Calculate the position of the sliderbutton (from edge of slider)
+		sliderValue = map(locX + locBtn, locX + 0, locX + sliderLine.width - sliderBtn.width - 0, 0, 255);
 
 	}
 
