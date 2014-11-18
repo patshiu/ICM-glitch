@@ -15,10 +15,18 @@ boolean sidebarInFull = true;
 PGraphics sidebar; 
 
 //Elements for header
+PImage logo; 
+PImage headerBg; 
 Btn importBtn;
 Btn resetBtn; 
 Btn pauseBtn; 
 Btn exportBtn; 
+
+//Elements for sidebar
+PImage sidebarBg; 
+PImage sidebarDiv; 
+PImage toggleInstructions; 
+
 
 //Elements for drift glitch
 ToggleBtn driftToggle; 
@@ -43,24 +51,26 @@ void addHeader(){
 	}
 	headerBar.beginDraw();
 	headerBar.fill(50, 50, 50);
-	headerBar.rect(0, 0, width, headerHeight); 
-	headerBar.rect(10,5, 300, 38); //Holder for logo
+	headerBar.rect(0, 0, width, headerHeight); //Draw header background color, in case background image does not loga
+	headerBar.image(headerBg, 0, 0, width, headerHeight);
+	headerBar.image(logo, 100, 15);
+	//headerBar.rect(10,5, 300, 38); //Holder for logo
 	
 	//Import btn
-	headerBar.image(importBtn.show(), width - importBtn.state1.width - 20 - resetBtn.state1.width - 20 - pauseBtn.state1.width - 20 - exportBtn.state1.width - 10, 10);
-	importBtn.setCanvasLoc(width - importBtn.state1.width - 20 - resetBtn.state1.width - 20 - pauseBtn.state1.width - 20 - exportBtn.state1.width - 10, headerPos + 10);
+	headerBar.image(importBtn.show(), width - importBtn.state1.width - 20 - resetBtn.state1.width - 20 - pauseBtn.state1.width - 20 - exportBtn.state1.width - 45, 10);
+	importBtn.setCanvasLoc(width - importBtn.state1.width - 20 - resetBtn.state1.width - 20 - pauseBtn.state1.width - 20 - exportBtn.state1.width - 45, headerPos + 10);
 
 	//Reset btn
-	headerBar.image(resetBtn.show(), width - resetBtn.state1.width - 20 - pauseBtn.state1.width - 20 - exportBtn.state1.width - 10, 10);
-	resetBtn.setCanvasLoc(width - resetBtn.state1.width - 20 - pauseBtn.state1.width - 20 - exportBtn.state1.width - 10, headerPos + 10);
+	headerBar.image(resetBtn.show(), width - resetBtn.state1.width - 20 - pauseBtn.state1.width - 20 - exportBtn.state1.width - 45, 10);
+	resetBtn.setCanvasLoc(width - resetBtn.state1.width - 20 - pauseBtn.state1.width - 20 - exportBtn.state1.width - 45, headerPos + 10);
 
 	//Pause btn
-	headerBar.image(pauseBtn.show(), width - pauseBtn.state1.width - 20 - exportBtn.state1.width - 10, 10);
-	pauseBtn.setCanvasLoc(width - pauseBtn.state1.width - 20 - exportBtn.state1.width - 10, headerPos - 10);
+	headerBar.image(pauseBtn.show(), width - pauseBtn.state1.width - 20 - exportBtn.state1.width - 45, 10);
+	pauseBtn.setCanvasLoc(width - pauseBtn.state1.width - 20 - exportBtn.state1.width - 45, headerPos - 10);
 	
 	//Export btn
-	headerBar.image(exportBtn.show(), width - exportBtn.state1.width - 10, 10);
-	exportBtn.setCanvasLoc(width - exportBtn.state1.width - 10, headerPos - 10);
+	headerBar.image(exportBtn.show(), width - exportBtn.state1.width - 45, 10);
+	exportBtn.setCanvasLoc(width - exportBtn.state1.width - 45, headerPos - 10);
 	
 	headerBar.endDraw();
 	displayHeader();
@@ -68,10 +78,12 @@ void addHeader(){
 
 void headerInit(){
 	headerBar = createGraphics(width, headerHeight); //Set up header canvas
-	importBtn = new Btn("btn_import.png");
-	resetBtn = new Btn("btn_reset.png");
-	pauseBtn = new Btn("btn_pause.png");
-	exportBtn = new Btn("btn_export.png");
+	logo = loadImage("slice_logo.png");
+	headerBg = loadImage("slice_header_background.png");
+	importBtn = new Btn("slice_btn_import.png");
+	resetBtn = new Btn("slice_btn_reset.png");
+	pauseBtn = new Btn("slice_btn_pause.png");
+	exportBtn = new Btn("slice_btn_export.png");
 }
 
 //This hides / unhides the header
@@ -116,38 +128,67 @@ void addSidebar(){
 		initSidebar();
 	}
 	sidebar.beginDraw();
-	sidebar.fill(255, 0, 0);
-	sidebar.rect( 0, 0, sidebarWidth, sidebar.height);
-	sidebar.fill( 0, 0, 255); //Holder for filter settings
-	sidebar.rect( 10, 20, sidebarWidth-20, 400);
-
+	sidebar.fill(#2b2b2b);
+	sidebar.stroke(#ff00e6); //Magenta stroke
+	sidebar.rect( 1, 1, sidebarBg.width -1, sidebarBg.height -1); //Draw a background in case sidebarBg image does not load
+	sidebar.image(sidebarBg, 0, 0, sidebarBg.width, sidebarBg.height);
+	
 	//Adding squareGlitchToggle
-	sidebar.image(squareGlitchOnOff.show(), 0, 40);
-	squareGlitchOnOff.setCanvasLoc( 0 + sidebarPos , 40 + headerHeight + 10);
+	sidebar.fill(255);
+	sidebar.textSize(16);//Setting text for label. Proxima Nova Semibold 16px
+	sidebar.textAlign(LEFT, TOP);
+	sidebar.textFont(ProximaNovaBold);
+	sidebar.text("PIXELITE", 20 + squareGlitchOnOff.btnOn.width + 10, 40 + 2);//Label; 4px added to 2 to adjust label baseline
+	sidebar.image(squareGlitchOnOff.show(), 20, 40);
+	squareGlitchOnOff.setCanvasLoc( 20 + sidebarPos , 40 + headerHeight + 10);
 
 	//Adding squareGlitchAspect slider
-	sidebar.image(squareGlitchAspect.show(),20, 90);
-	squareGlitchAspect.setCanvasLoc( 20 + sidebarPos , 90 + headerHeight + 10);
+	sidebar.image(squareGlitchAspect.show(),40, 90);
+	squareGlitchAspect.setCanvasLoc( 40 + sidebarPos , 90 + headerHeight + 10);
 	
 
 	//Adding squareGlitchSize slider
-	sidebar.image(squareGlitchSize.show(), 20, 130);
-	squareGlitchSize.setCanvasLoc( 20 + sidebarPos , 130 + headerHeight + 10); 
+	sidebar.image(squareGlitchSize.show(), 40, 130);
+	squareGlitchSize.setCanvasLoc( 40 + sidebarPos , 130 + headerHeight + 10); 
+
+	//Adding a divider
+	sidebar.image(sidebarDiv, 20, 170);
 	
 	//Adding driftGlitch toggle
-	sidebar.image(driftToggle.show(), 0, 200);
-	driftToggle.setCanvasLoc( 0 + sidebarPos , 200 + headerHeight + 10);
+	sidebar.textSize(16);//Setting text for label. Proxima Nova Semibold 16px
+	sidebar.textAlign(LEFT, TOP);
+	sidebar.textFont(ProximaNovaBold);
+	sidebar.text("DRIFT", 20 + squareGlitchOnOff.btnOn.width + 10, 190 + 2);//Label; 4px added to 2 to adjust label baseline
+	sidebar.image(driftToggle.show(), 20, 190);
+	driftToggle.setCanvasLoc( 20 + sidebarPos , 190 + headerHeight + 10);
 
+	//Adding a divider
+	sidebar.image(sidebarDiv, 20, 230);
 
-	sidebar.rect( 10, 20 + 400 + 10, sidebarWidth-20, 400);
+	//Adding the instructions to toggle control panel hiding
+	sidebar.image(toggleInstructions, 20, 250);
+
+	//More filters coming soon notice
+	sidebar.fill(#5a5a5a);
+	sidebar.textSize(12);//Setting text for label. Proxima Nova Light 12px
+	sidebar.textAlign(LEFT, BOTTOM);
+	sidebar.textFont(ProximaNovaLight);
+	sidebar.text("MORE FILTERS COMING SOON", 20, sidebarBg.height - 30);//Label aligned to bottom, to be 30px away from bottom of sidebar
 	sidebar.endDraw();
 	displaySidebar();
 	
 }
 
 void initSidebar() { //sets up sidebar
+
+	//set up sidebar PImages
+	sidebarBg = loadImage("slide_sidebar_background.png");
+	sidebarDiv = loadImage("slice_sidebar_divider.png");
+	toggleInstructions = loadImage("slice_toggle_instructions.png");
+
 	//set up sidebar canvas
-	sidebar = createGraphics(sidebarWidth, height - headerHeight - 20); 
+	//sidebar = createGraphics(sidebarWidth, height - headerHeight - 20); //Set height dynamically to canvas height
+	sidebar = createGraphics(sidebarBg.width, sidebarBg.height);
 	sidebarPos = width - sidebarWidth;
 
 	//set up all the control elements

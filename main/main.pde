@@ -10,6 +10,7 @@ import controlP5.*;
 
 PFont ProximaNova;
 PFont ProximaNovaBold;
+PFont ProximaNovaLight;
 
 //ControlP5 cp5;
 
@@ -23,20 +24,20 @@ boolean GIFEXPORTMODE = false ;
 
 //For the UI stuff
 Toggle disperseToggler;
+PImage vignette; 
 
-Slider xSlider; 
-Slider ySlider;
-int sliderMinSize = 100;
-int sliderAspect = 100;
 boolean toggleDisperse = true;
+
+
 
 
 void setup() {
 	
 	background(#222222);
-	testImg = loadImage("data/palette.png");
-	//size(testImg.width, testImg.height, OPENGL);
-	size(displayWidth, displayHeight, OPENGL);
+	testImg = loadImage("data/face.jpg");
+	vignette = loadImage("slice_vignette.png");
+	size(1380, 850, OPENGL);
+	//size(displayWidth, displayHeight, OPENGL);
 	imgCloud = new DisplacementCloud(testImg);
 	sketchPad = createGraphics(testImg.width, testImg.height);
 	cheGlitchObject = new CheGlitch();
@@ -53,6 +54,7 @@ void setup() {
 
 
 	//Setup fonts
+	ProximaNovaLight = loadFont("ProximaNova-Light-12.vlw");
 	ProximaNova = loadFont("ProximaNova-Regular-12.vlw");
 	ProximaNovaBold = loadFont("ProximaNova-Semibold-20.vlw");
 }
@@ -60,6 +62,7 @@ void setup() {
 void draw() {
 
 	background(#222222);
+	image(vignette, 0, 0, width, height);
  	float x = (width - testImg.width)/2;
  	float y = (height - testImg.height)/2;
  	pushMatrix();
@@ -111,7 +114,7 @@ void mousePressed(){
 
 	if (squareGlitchOnOff.isUnderCursor() == true){
 		squareGlitchOnOff.toggle();
-			if( squareGlitchOnOff.isOn == false){`
+			if( squareGlitchOnOff.isOn == false){
 				cheGlitchObject.isOn = false; 
 			}
 			else {

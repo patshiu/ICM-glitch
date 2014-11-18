@@ -27,9 +27,9 @@ class PixelParticle {
 		mass = 1; 
 
 		maxForce = 8; 
-		maxForceGoHome = 38; 
+		maxForceGoHome = 80; 
 		maxSpeed = 0.6; 
-		maxSpeedGoHome = 6.2; 
+		maxSpeedGoHome = 12.0; 
 
 		c =  motherImg.get(x, y);
 		isOffCanvas = false;

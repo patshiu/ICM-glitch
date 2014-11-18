@@ -63,8 +63,8 @@ class ToggleBtn {
 
 	ToggleBtn(boolean initState, float x, float y) {
 		isOn = initState; 
-		btnOn = loadImage("btn_toggle_ON.png");
-		btnOff = loadImage("btn_toggle_OFF.png");
+		btnOn = loadImage("slice_toggle_ON.png");
+		btnOff = loadImage("slice_toggle_OFF.png");
 		locX = x; 
 		locY = y; 
 		toggleBtnCanvas = createGraphics(btnOn.width, btnOn.height); 
@@ -129,8 +129,8 @@ class Slider {
 
 	Slider(float initVal, float x, float y ){
 		sliderValue = constrain(initVal, 0, 255); //This constrains the slider's value 0 - 255
-		sliderBtn = loadImage("slider_btn.png");
-		sliderLine = loadImage("slider_bg_black.png");
+		sliderBtn = loadImage("slice_slider_btn.png");
+		sliderLine = loadImage("slice_slider_spine.png");
 		locX = x; 
 		locY = y; 
 		locBtn = constrain(sliderValue, 15, sliderLine.width - sliderBtn.width - 15); 
