@@ -137,9 +137,14 @@ void addSidebar(){
 	sidebar.beginDraw();
 	sidebar.fill(#2b2b2b);
 	sidebar.stroke(#ff00e6); //Magenta stroke
-	sidebar.rect( 1, 1, sidebarBg.width -1, sidebarBg.height -1); //Draw a background in case sidebarBg image does not load
+	sidebar.rect( 1, 1, sidebarBg.width -1, sidebarBg.height -10); //Draw a background in case sidebarBg image does not load
 	sidebar.image(sidebarBg, 0, 0, sidebarBg.width, sidebarBg.height);
 	
+	///Add background
+	sidebar.fill(255, 25);
+	sidebar.noStroke();
+	sidebar.rect(10,15, sidebarBg.width - 10*2, 20 + 90);
+
 	//Adding squareGlitchToggle
 	sidebar.fill(255);
 	sidebar.textSize(16);//Setting text for label. Proxima Nova Semibold 16px
@@ -160,13 +165,13 @@ void addSidebar(){
 	
 
 	//Adding squareGlitchSize slider
-	sidebar.fill(255);
-	sidebar.textAlign(LEFT, TOP);
-	sidebar.textFont(ProximaNovaLight);
-	sidebar.textSize(10);//Setting text for label. Proxima Nova Semibold 16px
-	sidebar.text("GLITCH MIN SIZE", 20 + squareGlitchOnOff.btnOn.width + 10 , 160 - 20);//Label; 4px added to 2 to adjust label baseline
-	sidebar.image(squareGlitchSize.show(), 20 + squareGlitchOnOff.btnOn.width + 10 , 160);
-	squareGlitchSize.setCanvasLoc( 20 + squareGlitchOnOff.btnOn.width + 10  + sidebarPos , 160 + headerHeight + 10); 
+	// sidebar.fill(255);
+	// sidebar.textAlign(LEFT, TOP);
+	// sidebar.textFont(ProximaNovaLight);
+	// sidebar.textSize(10);//Setting text for label. Proxima Nova Semibold 16px
+	// sidebar.text("GLITCH MIN SIZE", 20 + squareGlitchOnOff.btnOn.width + 10 , 80 - 20);//Label; 4px added to 2 to adjust label baseline
+	sidebar.image(squareGlitchSize.show(), 20 + squareGlitchOnOff.btnOn.width + 10 , 80);
+	squareGlitchSize.setCanvasLoc( 20 + squareGlitchOnOff.btnOn.width + 10  + sidebarPos , 80 + headerHeight + 10); 
 
 	//Adding a divider
 	sidebar.image(sidebarDiv, 20, 200);
