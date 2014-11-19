@@ -20,6 +20,7 @@ PImage testImg;
 PGraphics sketchPad; 
 DisplacementCloud imgCloud; 
 CheGlitch cheGlitchObject;
+Huemixx huemixxObject;
 GifMaker gifExport;
 boolean GIFEXPORTMODE = false ;
 
@@ -32,6 +33,7 @@ boolean toggleDisperse = true;
 //Set up for import
 String choosenFilePath;
 String notification;
+float notificationBrightness = 0; 
 
 
 
@@ -47,6 +49,7 @@ void setup() {
 	imgCloud = new DisplacementCloud(testImg);
 	sketchPad = createGraphics(testImg.width, testImg.height);
 	cheGlitchObject = new CheGlitch(testImg);
+	huemixxObject = new Huemixx(testImg);
 
 	notification = "";
 
@@ -78,6 +81,9 @@ void draw() {
 	translate( x, y );
 	imgCloud.translate( x, y );
 
+	//Huemix
+	huemixxObject.run();
+
 	//rect(0,0, height, width); //draw a background of random color picked from original imaged
 	imgCloud.run();
 	
@@ -90,6 +96,16 @@ void draw() {
 	if ( GIFEXPORTMODE == true){	
 		gifExport.setDelay(1);
 	  	gifExport.addFrame();
+  	}
+
+  	if ( notificationBrightness > 0){
+  		notificationBrightness -= 5;
+  		println(notificationBrightness);
+  	}
+
+  	if ( snapshotTime == true ){
+		saveFrame("_SNAPSHOTS/exportedImage_##.jpg");
+		snapshotTime = false; 
   	}
 
   	//DRAW UI
@@ -113,12 +129,17 @@ void mouseDragged() {
 	if (squareGlitchSize.isUnderCursor() == true){
 			squareGlitchSize.setValue(mouseX);
 			//println("Setting squareGlitchSize value to " + mouseX );
-		}
+	}
 
-		if (squareGlitchAspect.isUnderCursor() == true){
-			squareGlitchAspect.setValue(mouseX);
-			//println("Setting squareGlitchAspect value to " + mouseX );
-		}
+	if (squareGlitchAspect.isUnderCursor() == true){
+		squareGlitchAspect.setValue(mouseX);
+		//println("Setting squareGlitchAspect value to " + mouseX );
+	}
+
+	if (huemixxGlitchness.isUnderCursor() == true){
+		huemixxGlitchness.setValue(mouseX);
+		huemixxObject.updateGlitchParams();
+	}
 }
 
 void mousePressed(){
@@ -130,6 +151,16 @@ void mousePressed(){
 			}
 			else {
 				cheGlitchObject.isOn = true;
+			}
+	}
+
+	if (huemixxGlitchOnOff.isUnderCursor() == true){
+		huemixxGlitchOnOff.toggle();
+			if( huemixxGlitchOnOff.isOn == false){
+				huemixxObject.isOn = false; 
+			}
+			else {
+				huemixxObject.isOn = true;
 			}
 	}
 
@@ -148,25 +179,29 @@ void mousePressed(){
 		//Setup Import function
 		selectInput("Select a file to process:", "fileSelected");
 		println("Import button was pressed");
-		notification = "You hit a button. Sorry it's not working yet. ";
+		notificationBrightness = 255 * 2; 
+		notification = "Open a file";
 
 	}
 
 	if (resetBtn.isUnderCursor() == true){
 		println("Reset button was pressed");
-		notification = "You hit a button. Sorry it's not working yet. ";
+		notificationBrightness = 255 * 2; 
+		notification = "RESET BUTTON: Sorry it's not working yet";
 	}
 
-	if ( pauseBtn.isUnderCursor() == true){
+	if (pauseBtn.isUnderCursor() == true){
 		println("Pause button was pressed");
-		notification = "You hit a button. Sorry it's not working yet. ";
+		notificationBrightness = 255 * 2;
+		notification = "PAUSE BUTTON: Sorry it's not working yet";
 
 	}
 
 	if (exportBtn.isUnderCursor() == true){
 		println("Export button was pressed");
-		saveFrame("exportedImage_##.jpg");
-		notification = "You hit a button. Sorry it's not working yet. ";
+		snapshotTime = true;
+		notificationBrightness = 255 * 2; 
+		notification = "Image saved to _SNAPSHOTS folder";
 	}
 
 }
@@ -181,6 +216,7 @@ void fileSelected(File selection) {
     testImg = loadImage(choosenFilePath);
 	imgCloud.updateImg(testImg);
 	cheGlitchObject.updateImg(testImg);
+	huemixxObject.updateImg(testImg);
   }
 }
 
