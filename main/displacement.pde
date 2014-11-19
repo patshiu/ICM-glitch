@@ -47,6 +47,10 @@ class DisplacementCloud{
 		disperse = false;
 	}
 
+	void updateImg(PImage inputImage){
+		imageCloud = new PixelParticleSystem(inputImage, 2);
+	}
+
 	//Utility functions to set the disperse mode
 
 	//LAVA LAMP

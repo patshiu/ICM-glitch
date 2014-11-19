@@ -16,6 +16,7 @@ PFont ProximaNovaLight;
 
 
 PImage testImg; 
+
 PGraphics sketchPad; 
 DisplacementCloud imgCloud; 
 CheGlitch cheGlitchObject;
@@ -28,6 +29,9 @@ PImage vignette;
 
 boolean toggleDisperse = true;
 
+//Set up for import
+String choosenFilePath;
+String notification;
 
 
 
@@ -35,13 +39,17 @@ void setup() {
 	
 	background(#222222);
 	testImg = loadImage("data/face.jpg");
+
 	vignette = loadImage("slice_vignette.png");
 	size(1380, 850, OPENGL); //absolute dimension
 	//size(testImg.width+100, testImg.height+100, OPENGL);
 	//size(displayWidth, displayHeight, OPENGL);
 	imgCloud = new DisplacementCloud(testImg);
 	sketchPad = createGraphics(testImg.width, testImg.height);
-	cheGlitchObject = new CheGlitch();
+	cheGlitchObject = new CheGlitch(testImg);
+
+	notification = "";
+
 	imgCloud.flockToField(true);
 	if ( GIFEXPORTMODE == true){
 		frameRate(5);
@@ -73,7 +81,9 @@ void draw() {
 	//rect(0,0, height, width); //draw a background of random color picked from original imaged
 	imgCloud.run();
 	
-	cheGlitchObject.splitImage(0, 0, testImg.width, testImg.height);
+	float w = cheGlitchObject.img.width;
+	float h = cheGlitchObject.img.height;
+	cheGlitchObject.splitImage(0, 0, w, h);
 
 	popMatrix();
 
@@ -135,22 +145,43 @@ void mousePressed(){
 	}
 
 	if (importBtn.isUnderCursor() == true){
+		//Setup Import function
+		selectInput("Select a file to process:", "fileSelected");
 		println("Import button was pressed");
+		notification = "You hit a button. Sorry it's not working yet. ";
+
 	}
 
 	if (resetBtn.isUnderCursor() == true){
 		println("Reset button was pressed");
+		notification = "You hit a button. Sorry it's not working yet. ";
 	}
 
 	if ( pauseBtn.isUnderCursor() == true){
 		println("Pause button was pressed");
+		notification = "You hit a button. Sorry it's not working yet. ";
+
 	}
 
 	if (exportBtn.isUnderCursor() == true){
 		println("Export button was pressed");
 		saveFrame("exportedImage_##.jpg");
+		notification = "You hit a button. Sorry it's not working yet. ";
 	}
 
+}
+
+
+void fileSelected(File selection) {
+  if (selection == null) {
+    println("Window was closed or the user hit cancel.");
+  } else {
+    choosenFilePath = selection.getAbsolutePath();
+    println("User selected " + choosenFilePath);
+    testImg = loadImage(choosenFilePath);
+	imgCloud.updateImg(testImg);
+	cheGlitchObject.updateImg(testImg);
+  }
 }
 
 void mouseMoved() {
@@ -159,7 +190,7 @@ void mouseMoved() {
 
 
 void keyPressed() {
-	println(keyCode); 
+	//println(keyCode); 
 
 	if (keyCode == 9){ //If "tab" is hit, toggle the UI
 		toggleHeader();

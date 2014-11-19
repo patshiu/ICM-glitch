@@ -1,8 +1,7 @@
 // mouse-over to change parameters, have to move mouse slowly
 // x co-ord = detail (move right for more detail, left for less)
 // y co-ord = glitch (move down for more glitch, up for less glitch)
-
-PImage im; 
+ 
 float MAX_ASPECT = 65.0; // maximum aspect ratio of rectangle
 float MIN_SIZE = 2.0;    // minimum size of rectangle/ellipse on shortest axis
 
@@ -17,24 +16,24 @@ class CheGlitch {
   float x, y, w, h; 
 
   //Constructor
-  CheGlitch(){
+  CheGlitch(PImage inputImage){
     MAX_ASPECT = 65.0; 
     MIN_SIZE = 2.0; 
     isOn = true;
-    updateImg();
+    img = inputImage;
   }
 
 
   //The method updates img to whatever's showing on the canvas
-  void updateImg() {
-    //img = get();
-    img = loadImage("data/face.jpg");
+  void updateImg(PImage inputImage) {
+    img = inputImage;
   }
 
   //This method update the glitch factor params according to mouse position
   void updateGlitchParams(){
     MAX_ASPECT = map( squareGlitchSize.sliderValue, 0, 255, 55.0, 65.0);
-    MIN_SIZE = map( squareGlitchAspect.sliderValue, 0, 255, 80.0, 2.0);
+    //MIN_SIZE = map( squareGlitchAspect.sliderValue, 0, 255, 2.0, 80.0);
+    MIN_SIZE = map( squareGlitchSize.sliderValue, 0, 255, 2.0, 80.0); //Temporarily mapping this to the squareGlitchSize slider value
   }
 
   //Apply the glitch
@@ -47,15 +46,15 @@ class CheGlitch {
 
       // if rectangle is small enough, draw it and bail out
 
-      if ( w <= MIN_SIZE || h <= MIN_SIZE) {
+      if ( w <= MIN_SIZE || h <= MIN_SIZE) { 
         // fill with the average colour of pixels in the rectangle
         // shouldn't take too long as the size is restricted
         int area = 0;
         float lumR = 0, lumG = 0, lumB=0, sqAlpha=0;
-        for (float xx=x; xx<x+w; xx++) {
-          for (float yy=y; yy<y+h; yy++) {
+        for (float iterX = x; iterX < x+w; iterX++) {
+          for (float iterY = y; iterY < y+h; iterY++) {
             area++;
-            int c = img.pixels[(int)yy*img.width + (int)xx];
+            int c = img.pixels[(int)iterY*img.width + (int)iterX];
             lumB+=(c&0xFF);
             lumG+=((c&0xFF00)>>8);
             lumR+=((c&0xFF0000)>>16);
@@ -69,7 +68,8 @@ class CheGlitch {
         fill(lumR, lumG, lumB, sqAlpha);
         noStroke();
         rect(x,y,w,h);
-        // ellipse(x, y, w, h);
+        //ellipseMode(CENTER);
+        //ellipse(x, y, w, w);
         return;
       }
 

@@ -9,7 +9,7 @@ float headerPos = 0;
 boolean headerInFull = true;
 PGraphics headerBar; //NOTE: This MUST be declared in setup 
 
-int sidebarWidth = 300; 
+int sidebarWidth = 320; 
 float sidebarPos; 
 boolean sidebarInFull = true; 
 PGraphics sidebar; 
@@ -55,6 +55,13 @@ void addHeader(){
 	headerBar.image(headerBg, 0, 0, width, headerHeight);
 	headerBar.image(logo, 100, 15);
 	//headerBar.rect(10,5, 300, 38); //Holder for logo
+
+	//Notification
+/*	headerBar.textSize(12);//Setting text for label. Proxima Nova Semibold 16px
+	headerBar.textAlign(RIGHT, TOP);
+	headerBar.textFont(ProximaNovaLight);
+	headerBar.text(notification, 20 + squareGlitchOnOff.btnOn.width + 10 + 200, 220 + 2);//Label; 4px added to 2 to adjust label baseline
+	headerBar.image(driftToggle.show(), 20, 220);*/
 	
 	//Import btn
 	headerBar.image(importBtn.show(), width - importBtn.state1.width - 20 - resetBtn.state1.width - 20 - pauseBtn.state1.width - 20 - exportBtn.state1.width - 45, 10);
@@ -143,30 +150,40 @@ void addSidebar(){
 	squareGlitchOnOff.setCanvasLoc( 20 + sidebarPos , 40 + headerHeight + 10);
 
 	//Adding squareGlitchAspect slider
-	sidebar.image(squareGlitchAspect.show(),40, 90);
-	squareGlitchAspect.setCanvasLoc( 40 + sidebarPos , 90 + headerHeight + 10);
+	// sidebar.fill(255);
+	// sidebar.textAlign(LEFT, TOP);
+	// sidebar.textFont(ProximaNovaLight);
+	// sidebar.textSize(10);//Setting text for label. Proxima Nova Semibold 16px
+	// sidebar.text("GLITCH ASPECT RATIO", 20 + squareGlitchOnOff.btnOn.width + 10 , 100 - 20);//Label; 4px added to 2 to adjust label baseline
+	// sidebar.image(squareGlitchAspect.show(),20 + squareGlitchOnOff.btnOn.width + 10 , 100);
+	// squareGlitchAspect.setCanvasLoc( 20 + squareGlitchOnOff.btnOn.width + 10 + sidebarPos , 100 + headerHeight + 10);
 	
 
 	//Adding squareGlitchSize slider
-	sidebar.image(squareGlitchSize.show(), 40, 130);
-	squareGlitchSize.setCanvasLoc( 40 + sidebarPos , 130 + headerHeight + 10); 
+	sidebar.fill(255);
+	sidebar.textAlign(LEFT, TOP);
+	sidebar.textFont(ProximaNovaLight);
+	sidebar.textSize(10);//Setting text for label. Proxima Nova Semibold 16px
+	sidebar.text("GLITCH MIN SIZE", 20 + squareGlitchOnOff.btnOn.width + 10 , 160 - 20);//Label; 4px added to 2 to adjust label baseline
+	sidebar.image(squareGlitchSize.show(), 20 + squareGlitchOnOff.btnOn.width + 10 , 160);
+	squareGlitchSize.setCanvasLoc( 20 + squareGlitchOnOff.btnOn.width + 10  + sidebarPos , 160 + headerHeight + 10); 
 
 	//Adding a divider
-	sidebar.image(sidebarDiv, 20, 170);
+	sidebar.image(sidebarDiv, 20, 200);
 	
 	//Adding driftGlitch toggle
 	sidebar.textSize(16);//Setting text for label. Proxima Nova Semibold 16px
 	sidebar.textAlign(LEFT, TOP);
 	sidebar.textFont(ProximaNovaBold);
-	sidebar.text("DRIFT", 20 + squareGlitchOnOff.btnOn.width + 10, 190 + 2);//Label; 4px added to 2 to adjust label baseline
-	sidebar.image(driftToggle.show(), 20, 190);
-	driftToggle.setCanvasLoc( 20 + sidebarPos , 190 + headerHeight + 10);
+	sidebar.text("DRIFT", 20 + squareGlitchOnOff.btnOn.width + 10, 220 + 2);//Label; 4px added to 2 to adjust label baseline
+	sidebar.image(driftToggle.show(), 20, 220);
+	driftToggle.setCanvasLoc( 20 + sidebarPos , 220 + headerHeight + 10);
 
 	//Adding a divider
-	sidebar.image(sidebarDiv, 20, 230);
+	sidebar.image(sidebarDiv, 20, 260);
 
 	//Adding the instructions to toggle control panel hiding
-	sidebar.image(toggleInstructions, 20, 250);
+	sidebar.image(toggleInstructions, 20, 280);
 
 	//More filters coming soon notice
 	sidebar.fill(#5a5a5a);

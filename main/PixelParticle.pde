@@ -197,6 +197,9 @@ class PixelParticleSystem {
 	}
 
 	void goHome(){
+		if(millis()%3000 == 0){
+			flowField.init();
+		}
 		for (int i = pixelCloud.size()-1; i > 0 ; i--){
 			PixelParticle currentPixel = pixelCloud.get(i);
 			currentPixel.goHome();
@@ -204,6 +207,9 @@ class PixelParticleSystem {
 	}	
 
 	void run(boolean lavaLamp, boolean flockToField, boolean randoWalk, boolean disperse, boolean goHome){
+		if(millis()%3000 == 0){
+			flowField.init();
+		}
 		for (int i = pixelCloud.size()-1; i > 0 ; i--){
 			PixelParticle currentPixel = pixelCloud.get(i);
 			currentPixel.run( lavaLamp, flockToField, flowField, randoWalk, disperse, goHome);

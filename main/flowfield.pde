@@ -3,13 +3,17 @@ class FlowField {
 	int cols, rows; 
 	int resolution; 
 
+	float xoff; 
+	float yoff;
+
 	FlowField(){
 		resolution = 10;
 		cols = width/resolution; 
 		rows = height/resolution; 
 		field = new PVector [cols] [rows];
 
-		float xoff = 0;
+		xoff = millis();
+		yoff = millis()*2;
 
 		init();
 	}
@@ -23,14 +27,16 @@ class FlowField {
 
 
 	void init() {
-		float xoff = 0;
 		//Initialize force field directions
+		xoff = 0;
+		yoff = 0;
+
 		for (int i = 0; i < cols; i++){
-			float yoff = 0;
 			for (int j = 0; j < rows; j++) {
 				float theta = map(noise(xoff,yoff),0,1,0,TWO_PI);
 				field[i][j] = new PVector(cos(theta),sin(theta));
-				yoff += 0.1;
+				//yoff += 0.1;
+				yoff += random(0,0.2);
 			}
 			xoff += 0.1;
 		}
