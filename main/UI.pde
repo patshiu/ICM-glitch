@@ -96,10 +96,10 @@ void headerInit(){
 	headerBar = createGraphics(width, headerHeight); //Set up header canvas
 	logo = loadImage("slice_logo.png");
 	headerBg = loadImage("slice_header_background.png");
-	importBtn = new Btn("slice_btn_import.png");
+	importBtn = new Btn("sliced_btn_import.png");
 	resetBtn = new Btn("slice_btn_reset.png");
 	pauseBtn = new Btn("slice_btn_pause.png");
-	exportBtn = new Btn("slice_btn_export.png");
+	exportBtn = new Btn("sliced_btn_export2.png");
 }
 
 //This hides / unhides the header
