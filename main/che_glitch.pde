@@ -17,7 +17,7 @@ class CheGlitch {
 
   //Constructor
   CheGlitch(PImage inputImage){
-    MAX_ASPECT = 65.0; 
+    MAX_ASPECT = 55.0; 
     MIN_SIZE = 2.0; 
     isOn = true;
     img = inputImage;

@@ -214,8 +214,8 @@ void initSidebar() { //sets up sidebar
 
 	//Elements for Square Glitch
 	squareGlitchOnOff = new ToggleBtn(true, 0, 0);
-	squareGlitchSize = new Slider(100, 0, 0); //Make sure slider inits with right button position
-	squareGlitchAspect = new Slider(50, 0, 0);
+	squareGlitchSize = new Slider(0, 0, 0); //Make sure slider inits with right button position
+	squareGlitchAspect = new Slider(0, 0, 0);
 
 }
 
