@@ -24,7 +24,10 @@ Huemixx huemixxObject;
 GifMaker gifExport;
 boolean GIFEXPORTMODE = false ;
 
-//For the UI stuff
+//For global UI
+boolean pauseSketch = false;
+
+//For control panel UI
 Toggle disperseToggler;
 PImage vignette; 
 
@@ -40,7 +43,7 @@ float notificationBrightness = 0;
 void setup() {
 	
 	background(#222222);
-	testImg = loadImage("data/face.jpg");
+	testImg = loadImage("data/palette.png");
 
 	vignette = loadImage("slice_vignette.png");
 	size(1380, 850, OPENGL); //absolute dimension
@@ -192,9 +195,16 @@ void mousePressed(){
 
 	if (pauseBtn.isUnderCursor() == true){
 		println("Pause button was pressed");
-		notificationBrightness = 255 * 2;
-		notification = "PAUSE BUTTON: Sorry it's not working yet";
-
+		if ( pauseSketch == false ){
+			pauseSketch = true; 
+			notificationBrightness = 255 * 2;
+			notification = "Sketch is now paused.";	
+			return;		
+		} else {
+			pauseSketch = false; 
+			notificationBrightness = 255 * 2;
+			notification = "Sketch is now playing.";	
+		}
 	}
 
 	if (exportBtn.isUnderCursor() == true){

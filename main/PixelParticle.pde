@@ -38,7 +38,9 @@ class PixelParticle {
 	void randoWalk(){
 		PVector randoV = PVector.random2D();
 		randoV.limit(0.3);
-		applyForce(randoV);
+		if ( pauseSketch == false){
+			applyForce(randoV);
+		}
 	}
 
 	void applyForce(PVector acceleration){
@@ -98,7 +100,9 @@ class PixelParticle {
 		desired.limit(2);
 		PVector steer = PVector.sub(desired, velocity);
 		steer.limit(maxForceGoHome);
-		applyForceGoHome(steer);
+		if (pauseSketch == false){
+			applyForceGoHome(steer);
+		}
 	}
 
 	void disperse(){
@@ -118,7 +122,10 @@ class PixelParticle {
 
 		PVector steer = PVector.sub(desired, velocity);
 		steer.limit(maxForce);
-		applyForce(steer);
+
+		if (pauseSketch == false){
+			applyForce(steer);
+		}
 	}
 
 	void updateParticle(boolean lavaLamp, boolean flockToField, FlowField flowField, boolean randoWalk, boolean disperse, boolean goHome){
