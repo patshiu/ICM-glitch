@@ -19,7 +19,7 @@ PImage testImg;
 
 PGraphics sketchPad; 
 DisplacementCloud imgCloud; 
-CheGlitch cheGlitchObject;
+RecursiveSplit recursiveSplitObject;
 Huemixx huemixxObject;
 GifMaker gifExport;
 boolean GIFEXPORTMODE = false ;
@@ -51,7 +51,7 @@ void setup() {
 	//size(displayWidth, displayHeight, OPENGL);
 	imgCloud = new DisplacementCloud(testImg);
 	sketchPad = createGraphics(testImg.width, testImg.height);
-	cheGlitchObject = new CheGlitch(testImg);
+	recursiveSplitObject = new RecursiveSplit(testImg);
 	huemixxObject = new Huemixx(testImg);
 
 	notification = "";
@@ -82,6 +82,7 @@ void draw() {
  	float y = (height - testImg.height)/2;
  	pushMatrix();
 	translate( x, y );
+	
 	imgCloud.translate( x, y );
 
 	//Huemix
@@ -90,9 +91,9 @@ void draw() {
 	//rect(0,0, height, width); //draw a background of random color picked from original imaged
 	imgCloud.run();
 	
-	float w = cheGlitchObject.img.width;
-	float h = cheGlitchObject.img.height;
-	cheGlitchObject.splitImage(0, 0, w, h);
+	float w = recursiveSplitObject.img.width;
+	float h = recursiveSplitObject.img.height;
+	recursiveSplitObject.run(0, 0, w, h);
 
 	popMatrix();
 
@@ -103,7 +104,7 @@ void draw() {
 
   	if ( notificationBrightness > 0){
   		notificationBrightness -= 5;
-  		println(notificationBrightness);
+  		//println(notificationBrightness);
   	}
 
   	if ( snapshotTime == true ){
@@ -148,34 +149,40 @@ void mouseDragged() {
 void mousePressed(){
 
 	if (squareGlitchOnOff.isUnderCursor() == true){
-		squareGlitchOnOff.toggle();
-			if( squareGlitchOnOff.isOn == false){
-				cheGlitchObject.isOn = false; 
-			}
-			else {
-				cheGlitchObject.isOn = true;
-			}
+		if ( pauseSketch == false){ //Only allow toggle if sketch is NOT paused
+			squareGlitchOnOff.toggle();
+				if( squareGlitchOnOff.isOn == false){
+					recursiveSplitObject.isOn = false; 
+				}
+				else {
+					recursiveSplitObject.isOn = true;
+				}
+		}
 	}
 
 	if (huemixxGlitchOnOff.isUnderCursor() == true){
-		huemixxGlitchOnOff.toggle();
-			if( huemixxGlitchOnOff.isOn == false){
-				huemixxObject.isOn = false; 
-			}
-			else {
-				huemixxObject.isOn = true;
-			}
+		if ( pauseSketch == false){ //Only allow toggle if sketch is NOT paused
+			huemixxGlitchOnOff.toggle();
+				if( huemixxGlitchOnOff.isOn == false){
+					huemixxObject.isOn = false; 
+				}
+				else {
+					huemixxObject.isOn = true;
+				}
+		}
 	}
 
 	if (driftToggle.isUnderCursor() == true){
-		driftToggle.toggle();
-			if( driftToggle.isOn == false){
-				imgCloud.goHome(true);
-			}
-			else {
-				imgCloud.flockToField(true);
-				imgCloud.goHome(false);
-			}
+		if ( pauseSketch == false){ //Only allow toggle if sketch is NOT paused
+			driftToggle.toggle();
+				if( driftToggle.isOn == false){
+					imgCloud.goHome(true);
+				}
+				else {
+					imgCloud.flockToField(true);
+					imgCloud.goHome(false);
+				}
+		}
 	}
 
 	if (importBtn.isUnderCursor() == true){
@@ -225,14 +232,11 @@ void fileSelected(File selection) {
     println("User selected " + choosenFilePath);
     testImg = loadImage(choosenFilePath);
 	imgCloud.updateImg(testImg);
-	cheGlitchObject.updateImg(testImg);
+	recursiveSplitObject.updateImg(testImg);
 	huemixxObject.updateImg(testImg);
   }
 }
-
-void mouseMoved() {
-	cheGlitchObject.updateGlitchParams();
-}
+ 
 
 
 void keyPressed() {
